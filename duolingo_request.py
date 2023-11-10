@@ -1,3 +1,4 @@
+# duolingo_request.py
 import os
 import requests
 import json
@@ -22,6 +23,8 @@ def make_request(user_id, token, offset_names):
             "Content-Type": "application/json",
             "Accept-Encoding": "gzip, deflate",
         }
+        if user_id == "909819677":  #Added Skip Option 
+            offset_names = [offset for offset in offset_names if offset != "xp_boost_stackable"]
 
         for offset_name in offset_names:
             request_data = {
@@ -59,6 +62,7 @@ def run_make_request():
             token_var = user_id + "_TOKEN"
             token = os.getenv(token_var)
 
+            # Load offset names from the JSON file
             offset_names = load_offsets_from_json("offsets.json")
             
             make_request(user_id, token, offset_names)
