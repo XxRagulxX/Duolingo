@@ -1,7 +1,7 @@
 from flask import Flask, render_template
 import threading
 import json
-import duolingo_request
+from duolingo_request import run_make_request
 
 app = Flask(__name__)
 
@@ -12,5 +12,5 @@ def home():
     return render_template('index.html', response_data=response_data)
 
 if __name__ == '__main__':
-    threading.Thread(target=duolingo_request.make_request, daemon=True).start()
+    threading.Thread(target=run_make_request, daemon=True).start()
     app.run(host='0.0.0.0', port=3000)
