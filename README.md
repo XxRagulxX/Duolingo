@@ -1,1 +1,1 @@
-# Duolingo
+# Tholingo
