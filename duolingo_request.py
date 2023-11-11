@@ -1,4 +1,3 @@
-# duolingo_request.py
 import os
 import requests
 import json
@@ -23,8 +22,6 @@ def make_request(user_id, token, offset_names):
             "Content-Type": "application/json",
             "Accept-Encoding": "gzip, deflate",
         }
-        if user_id == "909819677":  #Added Skip Option 
-            offset_names = [offset for offset in offset_names if offset != "xp_boost_stackable"]
 
         for offset_name in offset_names:
             request_data = {
@@ -44,10 +41,10 @@ def make_request(user_id, token, offset_names):
             response = requests.post(url, data=request_data_json, headers=headers)
             response.raise_for_status()
 
-            with open("response_output.json", 'a') as output_file:
+           # with open("response_output.json", 'a') as output_file:
                 # Append data to the file
-                json.dump(response.json(), output_file, indent=2)
-                output_file.write("\n")
+              #  json.dump(response.json(), output_file, indent=2)
+               # output_file.write("\n")
 
             print(f"Response written to response_output.json for User ID: {user_id} and id: {offset_name}")
 
@@ -69,7 +66,8 @@ def run_make_request():
 
         # Sleep for 15 minutes before starting again
         print("Cooling down for 15 minutes...")
-        time.sleep(15 * 60)
+        #time.sleep(15 * 60)
+        time.sleep(1 * 60)
 
 if __name__ == '__main__':
     run_make_request()
